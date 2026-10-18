@@ -26,7 +26,7 @@ function generateRandomPosition(distance, angle, noOfPoints) {
 function setup() {
     const width = 700;
     const heigth = 500;
-    const title = "rectangle points";
+    const title = "points in circle";
     const fps = 60;
 
     r.SetTraceLogLevel(r.LOG_NONE);
@@ -43,7 +43,6 @@ function setup() {
         angle,
         noOfPoints,
     );
-    console.log(randomValues);
 
     const pallete = {
         bg: r.DARKBLUE,
