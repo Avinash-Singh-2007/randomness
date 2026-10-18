@@ -4,10 +4,6 @@ function running() {
     return !r.WindowShouldClose();
 }
 
-function radian(degree) {
-    return (degree * 180) / Math.PI;
-}
-
 function generateRandomPosition(distance, angle, noOfPoints, origin) {
     const randomPosition = [];
 
@@ -15,8 +11,8 @@ function generateRandomPosition(distance, angle, noOfPoints, origin) {
         const randomAngle = Math.random() * angle;
         const randomdistance = Math.random() * distance;
 
-        const x = randomdistance * Math.cos(radian(randomAngle)) + origin.x;
-        const y = randomdistance * Math.sin(radian(randomAngle)) + origin.y;
+        const x = randomdistance * Math.cos(randomAngle) + origin.x;
+        const y = randomdistance * Math.sin(randomAngle) + origin.y;
         randomPosition.push({ x, y });
     }
 
