@@ -4,33 +4,60 @@ function running() {
     return !r.WindowShouldClose();
 }
 
+function generateRandomPositionX(startPos, endPos, noOfPoints) {
+    const randomPositionX = [];
+
+    for (let i = 0; i < noOfPoints; i++) {
+        const x = Math.random() * (endPos - startPos) + startPos;
+        randomPositionX.push(x);
+    }
+
+    return randomPositionX;
+}
+
 function setup() {
-    const width = 500;
-    const heigth = 500;
-    const title = "Random";
-    const fps = 50;
+    const width = 700;
+    const height = 500;
+    const title = "random lines";
+    const fps = 60;
 
     r.SetTraceLogLevel(r.LOG_NONE);
-    r.InitWindow(width, heigth, title);
+    r.InitWindow(width, height, title);
     r.SetTargetFPS(fps);
 
+    const minX = 0;
+    const maxX = width;
+
+    const noOfPoints = 100;
+
+    const randomValuesX = generateRandomPositionX(minX, maxX, noOfPoints);
+
+    const pallete = {
+        bg: r.DARKBLUE,
+        circle: {
+            r: 255,
+            g: 255,
+            b: 255,
+            a: 150,
+        },
+    };
+
     return {
-        screen: { width, heigth },
-        rect: { x: 0, y: 0 },
+        screen: { width, height },
+        randomValuesX,
+        pallete,
     };
 }
 
-function update(w) {
-    const min = 0;
-    const max = w.screen.width;
-    w.rect.x = Math.floor(Math.random() * (max - min)) + min;
-}
+function update(w) {}
 
 function draw(w) {
     r.BeginDrawing();
-    r.ClearBackground(r.BLUE);
+    r.ClearBackground(w.pallete.bg);
 
-    r.DrawRectangle(w.rect.x, w.rect.y, 2, w.screen.heigth, r.WHITE);
+    for (const value of w.randomValuesX) {
+        r.DrawRectangle(value, 0, 2, w.screen.height, w.pallete.circle);
+    }
 
     r.EndDrawing();
 }

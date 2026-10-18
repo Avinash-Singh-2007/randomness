@@ -4,10 +4,10 @@ function running() {
     return !r.WindowShouldClose();
 }
 
-function generateRandomPosition(startPos, endPos) {
+function generateRandomPosition(startPos, endPos, noOfPoints) {
     const randomPosition = [];
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < noOfPoints; i++) {
         const x = Math.random() * (endPos.x - startPos.x) + startPos.x;
         const y = Math.random() * (endPos.y - startPos.y) + startPos.y;
         randomPosition.push({ x, y });
@@ -33,23 +33,29 @@ function setup() {
     const minY = rect.y;
     const maxY = rect.y + rect.height;
 
+    const noOfPoints = 500;
+
     const randomValues = generateRandomPosition(
         { x: minX, y: minY },
         { x: maxX, y: maxY },
+        noOfPoints,
     );
 
-    const color = {
-        r: 255,
-        g: 255,
-        b: 255,
-        a: 150,
+    const pallete = {
+        bg: r.DARKBLUE,
+        circle: {
+            r: 255,
+            g: 255,
+            b: 255,
+            a: 150,
+        },
     };
 
     return {
         screen: { width, heigth },
         rect,
         randomValues,
-        color,
+        pallete,
     };
 }
 
@@ -57,12 +63,12 @@ function update(w) {}
 
 function draw(w) {
     r.BeginDrawing();
-    r.ClearBackground(r.BLUE);
+    r.ClearBackground(w.pallete.bg);
 
     r.DrawRectangleLinesEx(w.rect, 2, r.WHITE);
 
     for (const value of w.randomValues) {
-        r.DrawCircleV(value, 8, w.color);
+        r.DrawCircleV(value, 8, w.pallete.circle);
     }
 
     r.EndDrawing();

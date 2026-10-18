@@ -4,34 +4,67 @@ function running() {
     return !r.WindowShouldClose();
 }
 
+function generateRandomPosition(startPos, endPos, noOfPoints) {
+    const randomPosition = [];
+
+    for (let i = 0; i < noOfPoints; i++) {
+        const x = Math.random() * (endPos.x - startPos.x) + startPos.x;
+        const y = Math.random() * (endPos.y - startPos.y) + startPos.y;
+        randomPosition.push({ x, y });
+    }
+
+    return randomPosition;
+}
+
 function setup() {
-    const width = 300;
-    const heigth = 300;
+    const width = 700;
+    const height = 500;
     const title = "screen points";
     const fps = 60;
 
     r.SetTraceLogLevel(r.LOG_NONE);
-    r.InitWindow(width, heigth, title);
+    r.InitWindow(width, height, title);
     r.SetTargetFPS(fps);
 
+    const minX = 0;
+    const maxX = width;
+    const minY = 0;
+    const maxY = height;
+
+    const noOfPoints = 500;
+
+    const randomValues = generateRandomPosition(
+        { x: minX, y: minY },
+        { x: maxX, y: maxY },
+        noOfPoints,
+    );
+
+    const pallete = {
+        bg: r.DARKBLUE,
+        circle: {
+            r: 255,
+            g: 255,
+            b: 255,
+            a: 150,
+        },
+    };
+
     return {
-        screen: { width, heigth },
-        circle: { x: 0, y: 0 },
+        screen: { width, height },
+        randomValues,
+        pallete,
     };
 }
 
-function update(w) {
-    const min = 0;
-    const max = w.screen.width;
-    w.circle.x = Math.floor(Math.random() * (max - min)) + min;
-    w.circle.y = Math.floor(Math.random() * (max - min)) + min;
-}
+function update(w) {}
 
 function draw(w) {
     r.BeginDrawing();
-    r.ClearBackground(r.BLUE);
+    r.ClearBackground(w.pallete.bg);
 
-    r.DrawCircle(w.circle.x, w.circle.y, 5, r.WHITE);
+    for (const value of w.randomValues) {
+        r.DrawCircleV(value, 8, w.pallete.circle);
+    }
 
     r.EndDrawing();
 }
