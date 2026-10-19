@@ -12,13 +12,11 @@ function generateRandomPosition(start, angle, parallelogram, noOfPoints) {
     const randomPosition = [];
 
     for (let i = 0; i < noOfPoints; i++) {
-        const randomAngle = Math.random() * angle;
-
-        const shift = parallelogram.heigth / Math.tan(radian(randomAngle));
-        // console.log(shift);
-
-        const x = shift + start.x;
         const y = Math.random() * parallelogram.heigth + start.y;
+        let rX = Math.random() * parallelogram.width + start.x;
+
+        const shift = (y - start.y) / Math.tan(radian(angle));
+        const x = rX + shift;
 
         randomPosition.push({ x, y });
     }
@@ -36,7 +34,7 @@ function setup() {
     r.InitWindow(width, heigth, title);
     r.SetTargetFPS(fps);
 
-    const angleA = 100;
+    const angleA = 110;
 
     const parallelogram = {
         width: 300,
@@ -54,6 +52,7 @@ function setup() {
     };
 
     const shift = parallelogram.heigth / Math.tan(radian(angleA));
+    console.log(angleA, Math.tan(radian(angleA)));
 
     const point3 = {
         x: point2.x + shift,
