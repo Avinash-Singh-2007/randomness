@@ -12,7 +12,7 @@ function generateRandomPosition(start, angle, parallelogram, noOfPoints) {
     const randomPosition = [];
 
     for (let i = 0; i < noOfPoints; i++) {
-        const y = Math.random() * parallelogram.heigth + start.y;
+        const y = Math.random() * parallelogram.height + start.y;
         let rX = Math.random() * parallelogram.width + start.x;
 
         const shift = (y - start.y) / Math.tan(radian(angle));
@@ -26,19 +26,19 @@ function generateRandomPosition(start, angle, parallelogram, noOfPoints) {
 
 function setup() {
     const width = 700;
-    const heigth = 500;
+    const height = 500;
     const title = "points in parallelogram";
     const fps = 60;
 
     r.SetTraceLogLevel(r.LOG_NONE);
-    r.InitWindow(width, heigth, title);
+    r.InitWindow(width, height, title);
     r.SetTargetFPS(fps);
 
     const angleA = 110;
 
     const parallelogram = {
         width: 300,
-        heigth: 150,
+        height: 150,
     };
 
     const point1 = {
@@ -51,12 +51,11 @@ function setup() {
         y: point1.y,
     };
 
-    const shift = parallelogram.heigth / Math.tan(radian(angleA));
-    console.log(angleA, Math.tan(radian(angleA)));
+    const shift = parallelogram.height / Math.tan(radian(angleA));
 
     const point3 = {
         x: point2.x + shift,
-        y: point2.y + parallelogram.heigth,
+        y: point2.y + parallelogram.height,
     };
 
     const point4 = {
@@ -84,7 +83,7 @@ function setup() {
     };
 
     return {
-        screen: { width, heigth },
+        screen: { width, height: height },
         randomValues,
         pallete,
         point1,
