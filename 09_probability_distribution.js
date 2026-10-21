@@ -13,19 +13,23 @@ function calcAverage(arr) {
     return sum / arr.length;
 }
 
+function getRandomAverage(noOfRandomNumber, range) {
+    const randomValArr = [];
+    for (let i = 0; i < noOfRandomNumber; i++) {
+        randomValArr.push(
+            Math.random() * (range.end - range.start) + range.start,
+        );
+    }
+
+    return calcAverage(randomValArr);
+}
+
 function generateRandomPosition(range, noOfPoints, noOfRandomNumber) {
     const randomPosition = [];
 
     for (let i = 0; i < noOfPoints; i++) {
-        const randomValArr = [];
-        for (let i = 0; i < noOfRandomNumber; i++) {
-            randomValArr.push(Math.random() * (range.end - range.start)) +
-                range.start;
-        }
-
-        const average = calcAverage(randomValArr);
-        const x = Math.random() * average;
-        const y = Math.random() * average;
+        const x = Math.random() * getRandomAverage(noOfRandomNumber, range);
+        const y = Math.random() * getRandomAverage(noOfRandomNumber, range);
         randomPosition.push({ x, y });
     }
 
@@ -45,7 +49,7 @@ function setup() {
     const noOfPoints = 500;
     const range = { start: 0, end: width };
 
-    const randomValues = generateRandomPosition(range, noOfPoints, 2);
+    const randomValues = generateRandomPosition(range, noOfPoints, 5);
 
     const pallete = {
         bg: r.DARKBLUE,
