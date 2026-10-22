@@ -46,10 +46,10 @@ function setup() {
     r.InitWindow(width, height, title);
     r.SetTargetFPS(fps);
 
-    const noOfPoints = 500;
-    const range = { start: 0, end: width };
+    const noOfPoints = 400;
+    const range = { start: 400, end: width };
 
-    const randomValues = generateRandomPosition(range, noOfPoints, 5);
+    const randomValues = generateRandomPosition(range, noOfPoints, 2);
 
     const pallete = {
         bg: r.DARKBLUE,
