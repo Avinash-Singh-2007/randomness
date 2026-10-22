@@ -19,7 +19,7 @@ function generateRandomPosition(startPos, endPos, noOfPoints) {
 function setup() {
     const width = 500;
     const heigth = 500;
-    const title = "rectangle points";
+    const title = "monte carlo";
     const fps = 60;
 
     r.SetTraceLogLevel(r.LOG_NONE);
@@ -75,7 +75,6 @@ function draw(w) {
     r.ClearBackground(w.pallete.bg);
 
     r.DrawRectangleLinesEx(w.rect, 2, r.WHITE);
-    r.DrawCircleLines(w.circle.x, w.circle.y, w.circle.radius, r.WHITE);
 
     let totalPointsInsideCircle = 0;
     for (const value of w.randomValues) {
@@ -83,6 +82,7 @@ function draw(w) {
         if (distance(value, { x: w.circle.x, y: w.circle.y }) < w.circle.radius)
             totalPointsInsideCircle += 1;
     }
+    r.DrawCircleLines(w.circle.x, w.circle.y, w.circle.radius, r.RED);
 
     const areaOfSquare = w.rect.width ** 2;
     const density = areaOfSquare / w.noOfPoints;
